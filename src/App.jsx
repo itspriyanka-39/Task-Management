@@ -64,8 +64,11 @@ function App() {
       previousTasks.filter((task) => task.id !== taskId)
     );
   }
+  const sortedTasks = [...tasks].sort((a, b) => {
+    return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+  });
 
-  const visibleTasks = tasks.filter((task) => {
+  const visibleTasks = sortedTasks.filter((task) => {
     const matchesSearch = task.title
       .toLowerCase()
       .includes(search.trim().toLowerCase());
